@@ -32,7 +32,8 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.student = require('./studentModels')(sequelize, DataTypes)
+db.students = require('./studentModels')(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false })
 
+module.exports = db

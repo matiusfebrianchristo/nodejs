@@ -10,7 +10,8 @@ const corsOption = {
 }
 
 // router
-const router = require('./routes/student')
+const studentRouter = require('./routes/student')
+app.use('/student/', studentRouter)
 
 // middleware
 app.use(cors(corsOption))
