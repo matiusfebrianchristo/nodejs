@@ -1,6 +1,6 @@
 
 module.exports = (sequelize, DataTypes) => {
-    const student = sequelize.define('student', {
+    const students = sequelize.define('student', {
         nisn: {
             type: DataTypes.INTEGER,
             allowedNull: true,

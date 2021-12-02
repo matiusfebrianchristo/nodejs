@@ -9,6 +9,9 @@ const corsOption = {
     origin: 'http://localhost:8080'
 }
 
+// router
+const router = require('./routes/student')
+
 // middleware
 app.use(cors(corsOption))
 

@@ -1,4 +1,4 @@
-module.exports({
+module.exports = {
     HOST: 'localhost',
     DB: 'nodejs',
     USER: 'root',
@@ -6,10 +6,10 @@ module.exports({
     dialect: 'mysql',
 
     pool: {
-        max: '5',
-        min: '0',
+        max: 5,
+        min: 0,
         acquire: 50000,
         idle: 10000
     }
 
-})
+}
