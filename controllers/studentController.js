@@ -1,28 +1,28 @@
-const { json } = require('body-parser')
 const db = require('../models')
 
 // create main model
-const student = db.students
+const Student = db.students
 
 
 // main work
 
 // add student
 const addStudent = async (req, res) => {
+    // console.log(req)
     try {
         const data = {
             nisn: req.body.nisn,
             name: req.body.name,
             class: req.body.class
         }
-        //  console.log(data)
-         const request = await student.create(data)
+         // console.log(data)
+         const request = await Student.create(data)
          
-         return res.status(200).send(request)
+         res.status(200).send(request)
          
      } catch (error) {
-        console.log(JSON.stringify(req.body), req)
-         return res.status(500).send({
+        console.log(Student)
+        res.status(500).send({
              message: error.message
          })
      }
@@ -32,21 +32,49 @@ const addStudent = async (req, res) => {
 // list student
 const getAllStudent = async (req, res) => {
     try {
-        const data = await student.findAll()
-        return res.status(200).send(data)
+        const data = await Student.findAll()
+        res.status(200).send(data)
         
     } catch (error) {
-        return res.status(500).send({
+        console.log(db)
+        res.status(500).send({
             message: error.message
         })
         
     }
+}
 
+const updateStudent = async (req, res) => {
+    try{
+        const nisn = req.params.nisn
+        const request = await Student.update(req.body, {where : { nisn: nisn }})
 
+        res.status(200).send(request)
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
+
+const deleteStudent = async (req, res) => {
+    try {
+        const nisn = req.params.nisn
+        await Student.destroy({
+            where: {
+                nisn : nisn
+            }
+        })
+        res.status(200).send('Data has been deleted')
+    } catch ( error ){
+        res.status(500).send({
+            message: error.message
+        })
+    }
 }
 
 
 module.exports = {
     addStudent,
-    getAllStudent
+    getAllStudent,
+    updateStudent,
+    deleteStudent
 }

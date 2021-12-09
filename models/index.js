@@ -19,21 +19,23 @@ const sequelize = new Sequelize(
     }
 )
 
-sequelize.authenticate()
-.then(() => {
+try{
+    sequelize.authenticate()
     console.log("Success Authenticate")
-})
-.catch(err => {
-    console.log(err)
-})
+
+} catch ( error ) {
+    console.log(error.message)
+}
 
 const db = {}
 
 db.Sequelize = Sequelize
 db.sequelize = sequelize
-
 db.students = require('./studentModels')(sequelize, DataTypes)
-
 db.sequelize.sync({ force: false })
+.then ( () => {
+    console.log("re-sync db")
+})
+
 
 module.exports = db

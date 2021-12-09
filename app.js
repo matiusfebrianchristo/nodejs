@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const path = require('path');
 const bodyParser = require('body-parser')
 
 const app = express()
@@ -9,16 +10,18 @@ const corsOption = {
     origin: 'http://localhost:8080'
 }
 
-// router
-const studentRouter = require('./routes/student')
-app.use('/student/', studentRouter)
 
 // middleware
 app.use(cors(corsOption))
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
+
+// router
+
+const studentRouter = require('./routes/student')
+app.use('/api/students', studentRouter)
 
 // testing API
 app.get("/", (req, res) => {

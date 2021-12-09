@@ -1,6 +1,5 @@
-
 module.exports = (sequelize, DataTypes) => {
-    const students = sequelize.define('students', {
+    const Students = sequelize.define('students', {
         nisn: {
             type: DataTypes.INTEGER,
             allowedNull: false,
@@ -19,5 +18,5 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true
     })
 
-    return students
+    return Students
 }
